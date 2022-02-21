@@ -5,6 +5,10 @@
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
+/.idea/kotlinScripting.xml
+/.idea/misc.xml
+/.idea/vcs.xml
+/.idea/compiler.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store

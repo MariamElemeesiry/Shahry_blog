@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "shahry_blog"
-include ':app'
+include (":app")
+include (":network")
