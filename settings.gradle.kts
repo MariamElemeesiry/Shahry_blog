@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "shahry_blog"
 include (":app")
 include (":network")
+include(":room-db")
