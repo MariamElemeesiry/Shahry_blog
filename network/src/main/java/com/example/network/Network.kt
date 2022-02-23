@@ -3,12 +3,12 @@ package com.example.network
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 
-fun createNetworkClient(baseUrl: String, debug: Boolean = false) =
-    retrofitClient(baseUrl, httpClient(debug))
+fun createNetworkClient(baseUrl: String, debug: Boolean = false, typeConverter: Converter.Factory) =
+    retrofitClient(baseUrl, httpClient(debug), typeConverter)
 
 private fun httpClient(debug: Boolean): OkHttpClient {
     val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
@@ -20,10 +20,10 @@ private fun httpClient(debug: Boolean): OkHttpClient {
     return clientBuilder.build()
 }
 
-private fun retrofitClient(baseUrl: String, httpClient: OkHttpClient): Retrofit =
+private fun retrofitClient(baseUrl: String, httpClient: OkHttpClient, typeConverter: Converter.Factory): Retrofit =
     Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(httpClient)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(typeConverter)
         .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .build()

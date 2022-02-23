@@ -2,12 +2,12 @@ package com.example.shahry_blog.domain.entities
 
 import java.time.OffsetDateTime
 
-data class PostsDomain(
+
+data class CommentsDomain(
     val id: Long,
     val date: OffsetDateTime,
-    val title: String?,
+    val userName: String?,
     val body: String?,
-    val imageUrl: String?,
-    val author:AuthorDomain?,
-    val commentsList: List<CommentsDomain>
+    val email: String?,
+    val avatarUrl: String?
 )
