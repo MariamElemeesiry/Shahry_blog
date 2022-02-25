@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/post_iv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                fresco:actualImageScaleType="focusCrop"
+                fresco:placeholderImageScaleType="focusCrop"
+                app:layout_constraintDimensionRatio="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:placeholderImage="@drawable/article_image_placeholder"
+                app:viewAspectRatio="1" />
+
+            <TextView
+                android:id="@+id/title_tv"
+                style="@style/PostListTitleStyle"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent=".5"
+                android:layout_height="wrap_content"
+                tools:text="Aut nam autem qui non sit aspernatur ex tenetur."
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_half_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/post_iv"/>
+            <TextView
+                android:id="@+id/article_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/default_half_margin"
+                style="@style/PostListContentStyle"
+                android:ellipsize="end"
+                android:layout_marginHorizontal="@dimen/default_half_margin"
+                android:layout_marginVertical="@dimen/default_half_margin"
+                tools:text="Veniam accusamus ex. Delectus magnam quasi porro. Aut natus quaerat est at nam et accusantium. Mollitia eos aut neque occaecati et quam itaque dolore odio. Porro aperiam et similique. Esse fugit consequatur quasi."
+                app:layout_constraintTop_toBottomOf="@+id/post_iv"/>
+            <TextView
+                android:id="@+id/comments_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/SectionTitle"
+                android:layout_marginHorizontal="@dimen/default_half_margin"
+                android:layout_marginVertical="@dimen/default_half_margin"
+                android:text="@string/comments"
+                app:layout_constraintTop_toBottomOf="@id/article_tv"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comments_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/default_margin"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                tools:itemCount="10"
+                tools:listitem="@layout/comment_item"
+                app:layout_constraintTop_toBottomOf="@id/comments_tv"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>
