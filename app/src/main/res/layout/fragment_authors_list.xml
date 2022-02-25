@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         tools:context=".presentation.AuthorsListFragment">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/authors_tv"
+            android:id="@+id/articles_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

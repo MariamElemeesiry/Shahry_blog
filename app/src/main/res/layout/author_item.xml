@@ -12,7 +12,7 @@
         android:layout_marginHorizontal="@dimen/default_margin"
         android:layout_marginVertical="@dimen/default_margin"
         android:background="@drawable/rounded_grey"
-        android:padding="@dimen/default_quarter_margin"
+        android:paddingVertical="@dimen/default_quarter_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,15 +49,32 @@
             app:layout_constraintTop_toBottomOf="@+id/simpleDraweeView"
             app:layout_constraintWidth_percent=".8" />
 
-        <TextView
-            android:id="@+id/user_name_tv"
-            style="@style/AuthorEmailStyle"
-            tools:text="Adan.Reinger44"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/default_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/name_tv">
+
+            <TextView
+                android:id="@+id/user_name_tv"
+                style="@style/AuthorEmailStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/user_name_value_tv"
+                style="@style/AuthorEmailStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/user_name_tv"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Adan.Reinger44" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

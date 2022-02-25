@@ -15,6 +15,7 @@
 
     <style name="SectionTitle" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
     </style>
 
@@ -22,10 +23,17 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">16sp</item>
     </style>
+
     <style name="AuthorEmailStyle" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@android:color/notification_default_color</item>
         <item name="android:textSize">12sp</item>
     </style>
+
+    <style name="AuthorEmailDetailsStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/link_text_dark</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="AuthorUserNameStyle" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@android:color/notification_default_color</item>
         <item name="android:textSize">12sp</item>
