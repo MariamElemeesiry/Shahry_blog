@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/articles"
+        android:icon="@drawable/ic_articles"
+        android:title=""
+        app:labelVisibilityMode="unlabeled" />
+    <item
+        android:id="@+id/authors"
+        android:icon="@drawable/ic_authors"
+        android:title=""
+        app:labelVisibilityMode="unlabeled" />
+
+</menu>

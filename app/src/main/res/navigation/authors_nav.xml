@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/authors_nav"
+    app:startDestination="@+id/AuthorsListFragment">
+
+    <fragment
+        android:id="@+id/AuthorsListFragment"
+        android:name="com.example.shahry_blog.presentation.AuthorsListFragment"
+        android:label="AuthorsListFragment">
+
+    </fragment>
+    <fragment
+        android:id="@+id/AuthorPageFragment"
+        android:name="com.example.shahry_blog.presentation.AuthorPageFragment"
+        android:label="AuthorPageFragment">
+
+    </fragment>
+    <fragment
+        android:id="@+id/ArticleDetailsFragment"
+        android:name="com.example.shahry_blog.presentation.ArticleDetailsFragment"
+        android:label="ArticleDetailsFragment">
+
+    </fragment>
+</navigation>
