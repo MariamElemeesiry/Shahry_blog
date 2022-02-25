@@ -1,55 +1,92 @@
 package com.example.shahry_blog.di
 
-import android.content.Context
-import com.example.network.createNetworkClient
-import com.example.shahry_blog.data.data_source.local.database.BlogDatabase
+import com.example.shahry_blog.data.data_source.local.data_source.LocalAuthorDataSourceImpl
+import com.example.shahry_blog.data.data_source.local.data_source.LocalCommentsDataSourceImpl
+import com.example.shahry_blog.data.data_source.local.data_source.LocalPostsDataSourceImpl
+import com.example.shahry_blog.data.data_source.local.database.dao.AuthorsDao
+import com.example.shahry_blog.data.data_source.local.database.dao.CommentsDao
+import com.example.shahry_blog.data.data_source.local.database.dao.PostsDao
 import com.example.shahry_blog.data.data_source.remote.ShahryBlogClient
-import com.example.shahry_blog.data.type_converters.OffsetDateTimeTypeConverter
-import com.google.gson.*
+import com.example.shahry_blog.data.data_source.remote.data_source.RemoteAuthorDataSourceImpl
+import com.example.shahry_blog.data.data_source.remote.data_source.RemoteCommentsDataSourceImpl
+import com.example.shahry_blog.data.data_source.remote.data_source.RemotePostsDataSourceImpl
+import com.example.shahry_blog.domain.repositories.AuthorRepositoryImpl
+import com.example.shahry_blog.domain.repositories.CommentsRepositoryImpl
+import com.example.shahry_blog.domain.repositories.PostsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Converter
-import retrofit2.converter.gson.GsonConverterFactory
-import java.time.OffsetDateTime
-import java.time.ZonedDateTime
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule{
-    val BASE_URL = "https://sym-json-server.herokuapp.com/"
+class AppModule {
 
-    @Provides
+    //region DataSource
+    //region RemoteDataSource
     @Singleton
-    fun getDatabase(context: Context): BlogDatabase = BlogDatabase.getDatabaseInstance(context)
-
     @Provides
+    fun provideRemoteAuthorDataSource(networkClient: ShahryBlogClient): RemoteAuthorDataSourceImpl =
+        RemoteAuthorDataSourceImpl(networkClient)
+
     @Singleton
-    fun getGsonTypeConverter(): Converter.Factory {
-        val gson = GsonBuilder()
-            .registerTypeAdapter( // OffsetDateTime Deserializer
-                OffsetDateTime::class.java,
-                JsonDeserializer<OffsetDateTime> { json, _, _ ->
-                    OffsetDateTimeTypeConverter.toOffsetDateTime(json.asString)
-                })
-            .registerTypeAdapter(// OffsetDateTime Serializer
-                ZonedDateTime::class.java,
-                JsonSerializer<ZonedDateTime> { json, _, _ ->
-                    JsonPrimitive(OffsetDateTimeTypeConverter.toString(json.toOffsetDateTime()))
-                })
-            .create()
-
-        return GsonConverterFactory.create(gson)
-    }
-
     @Provides
+    fun provideRemoteCommentsDataSourceImpl(networkClient: ShahryBlogClient): RemoteCommentsDataSourceImpl =
+        RemoteCommentsDataSourceImpl(networkClient)
+
     @Singleton
-    fun getRetroInstance(): ShahryBlogClient =
-        createNetworkClient(BASE_URL, typeConverter = getGsonTypeConverter()).create(
-            ShahryBlogClient::class.java
-        )
+    @Provides
+    fun provideRemotePostsDataSourceImpl(networkClient: ShahryBlogClient): RemotePostsDataSourceImpl =
+        RemotePostsDataSourceImpl(networkClient)
+
+    //endregion
+    //region LocalDataSource
+    @Singleton
+    @Provides
+    fun provideLocalAuthorDataSource(authorsDao: AuthorsDao): LocalAuthorDataSourceImpl =
+        LocalAuthorDataSourceImpl(authorsDao)
+
+    @Singleton
+    @Provides
+    fun provideLocalCommentsDataSourceImpl(commentsDao: CommentsDao): LocalCommentsDataSourceImpl =
+        LocalCommentsDataSourceImpl(commentsDao)
+
+    @Singleton
+    @Provides
+    fun provideLocalPostsDataSourceImpl(postsDao: PostsDao): LocalPostsDataSourceImpl =
+        LocalPostsDataSourceImpl(postsDao)
+    //endregion
+    //endregion
+
+    //region Repositories
+    @Singleton
+    @Provides
+    fun providePostsRepository(
+        localPostsDataSourceImpl: LocalPostsDataSourceImpl,
+        remotePostsDataSourceImpl: RemotePostsDataSourceImpl
+    ): PostsRepositoryImpl =
+        PostsRepositoryImpl(localPostsDataSourceImpl, remotePostsDataSourceImpl)
+
+    @Singleton
+    @Provides
+    fun provideCommentsRepository(
+        localCommentsDataSourceImpl: LocalCommentsDataSourceImpl,
+        remoteCommentsDataSourceImpl: RemoteCommentsDataSourceImpl
+    ): CommentsRepositoryImpl =
+        CommentsRepositoryImpl(localCommentsDataSourceImpl, remoteCommentsDataSourceImpl)
+
+    @Singleton
+    @Provides
+    fun provideAuthorRepository(
+        localAuthorDataSourceImpl: LocalAuthorDataSourceImpl,
+        remoteAuthorDataSourceImpl: RemoteAuthorDataSourceImpl
+    ): AuthorRepositoryImpl =
+        AuthorRepositoryImpl(localAuthorDataSourceImpl, remoteAuthorDataSourceImpl)
+    //endregion
+
+    //region UseCases
+    //endregion
 
 
 }
