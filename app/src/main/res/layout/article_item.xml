@@ -11,16 +11,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@drawable/rounded_grey"
+        android:layout_marginTop="@dimen/default_half_margin"
+        android:layout_marginHorizontal="@dimen/default_half_margin"
         android:layout_height="wrap_content">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/post_iv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/default_half_margin"
             fresco:actualImageScaleType="focusCrop"
             fresco:placeholderImageScaleType="focusCrop"
-            app:layout_constraintDimensionRatio="1.8"
+            app:layout_constraintDimensionRatio="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -42,6 +44,7 @@
             android:id="@+id/article_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/default_half_margin"
             style="@style/PostListContentStyle"
             android:maxLines="2"
             android:ellipsize="end"
@@ -49,17 +52,6 @@
             android:layout_marginVertical="@dimen/default_half_margin"
             tools:text="Veniam accusamus ex. Delectus magnam quasi porro. Aut natus quaerat est at nam et accusantium. Mollitia eos aut neque occaecati et quam itaque dolore odio. Porro aperiam et similique. Esse fugit consequatur quasi."
             app:layout_constraintTop_toBottomOf="@+id/post_iv"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@color/black"
-            android:alpha=".5"
-            app:layout_constraintWidth_percent=".9"
-            android:layout_marginTop="@dimen/default_margin"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/article_tv"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

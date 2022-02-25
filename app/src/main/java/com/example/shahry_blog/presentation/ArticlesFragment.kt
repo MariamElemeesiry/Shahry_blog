@@ -6,18 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.shahry_blog.R
-import com.example.shahry_blog.databinding.FragmentAuthorsBinding
+import com.example.shahry_blog.databinding.FragmentArticlesBinding
 import com.example.shahry_blog.helpers.bind
 
-class AuthorsFragment : Fragment() {
-    lateinit var binding: FragmentAuthorsBinding
+class ArticlesFragment : Fragment() {
+    lateinit var binding: FragmentArticlesBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return bind<FragmentAuthorsBinding>(
-            R.layout.fragment_authors,
+        return bind<FragmentArticlesBinding>(
+            R.layout.fragment_articles,
             inflater,
             container
         ) { bind ->
@@ -25,4 +26,5 @@ class AuthorsFragment : Fragment() {
 
         }
     }
+
 }
