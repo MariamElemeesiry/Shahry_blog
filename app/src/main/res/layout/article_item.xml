@@ -44,7 +44,7 @@
             android:id="@+id/article_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/default_half_margin"
+            android:paddingBottom="@dimen/default_margin"
             style="@style/PostListContentStyle"
             android:maxLines="2"
             android:ellipsize="end"

@@ -8,7 +8,7 @@ import com.example.shahry_blog.domain.entities.CommentsDomain
 import java.time.OffsetDateTime
 
 @Entity(
-    tableName = "posts",
+    tableName = "comments",
     foreignKeys = [ForeignKey(
         entity = PostsEntity::class,
         parentColumns = ["id"],
@@ -26,11 +26,14 @@ data class CommentsEntity(
     @ColumnInfo(name = "postId") val postId:String
 )
 
-fun CommentsEntity.mapToDomain():CommentsDomain = CommentsDomain(
-    id= id,
+fun CommentsEntity.mapToDomain(): CommentsDomain = CommentsDomain(
+    id = id,
     userName = userName,
     date = date,
     body = body,
     email = email,
     avatarUrl = avatarUrl
 )
+
+fun List<CommentsEntity>.mapToDomain(): List<CommentsDomain> = map { it.mapToDomain() }
+

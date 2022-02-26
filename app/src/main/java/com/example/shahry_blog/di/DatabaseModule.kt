@@ -5,6 +5,7 @@ import com.example.shahry_blog.data.data_source.local.database.BlogDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -14,7 +15,8 @@ class DatabaseModule{
 
     @Provides
     @Singleton
-    fun getDatabase(context: Context): BlogDatabase = BlogDatabase.getDatabaseInstance(context)
+    fun getDatabase(@ApplicationContext context: Context): BlogDatabase =
+        BlogDatabase.getDatabaseInstance(context)
 
     @Provides
     @Singleton

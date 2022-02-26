@@ -13,6 +13,7 @@ import com.example.shahry_blog.data.data_source.remote.data_source.RemotePostsDa
 import com.example.shahry_blog.domain.repositories.AuthorRepositoryImpl
 import com.example.shahry_blog.domain.repositories.CommentsRepositoryImpl
 import com.example.shahry_blog.domain.repositories.PostsRepositoryImpl
+import com.example.shahry_blog.domain.usecases.AuthorsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -86,6 +87,12 @@ class AppModule {
     //endregion
 
     //region UseCases
+    @Singleton
+    @Provides
+    fun provideAuthorsUseCase(
+        authorRepositoryImpl: AuthorRepositoryImpl
+    ): AuthorsUseCase =
+        AuthorsUseCase(authorRepositoryImpl)
     //endregion
 
 

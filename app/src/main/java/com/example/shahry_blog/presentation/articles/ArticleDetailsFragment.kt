@@ -1,4 +1,4 @@
-package com.example.shahry_blog.presentation
+package com.example.shahry_blog.presentation.articles
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,18 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.shahry_blog.R
-import com.example.shahry_blog.databinding.FragmentAuthorPageBinding
+import com.example.shahry_blog.databinding.FragmentArticleDetailsBinding
 import com.example.shahry_blog.helpers.bind
+import dagger.hilt.android.AndroidEntryPoint
 
-class AuthorPageFragment : Fragment() {
-    lateinit var binding: FragmentAuthorPageBinding
+@AndroidEntryPoint
+class ArticleDetailsFragment : Fragment() {
+    lateinit var binding: FragmentArticleDetailsBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return bind<FragmentAuthorPageBinding>(
-            R.layout.fragment_author_page,
+        return bind<FragmentArticleDetailsBinding>(
+            R.layout.fragment_article_details,
             inflater,
             container
         ) { bind ->
@@ -25,4 +28,5 @@ class AuthorPageFragment : Fragment() {
 
         }
     }
+
 }

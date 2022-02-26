@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "shahry_blog"
-include (":app")
+rootProject.name = "Shahry blog"
+include(":app")
 include (":network")
 include(":room-db")

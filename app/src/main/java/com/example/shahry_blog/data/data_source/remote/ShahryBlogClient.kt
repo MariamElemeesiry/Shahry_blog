@@ -15,15 +15,25 @@ interface ShahryBlogClient {
     fun getPosts(
         @Query("_page") page: Int = 1,
         @Query("_limit") limit: Int = 20,
+        @Query("_sort") _sort: String = "date",
+        @Query("_order") _order: String = "desc"
     ): Single<Response<List<PostsEntity>>>
 
     @GET("authors")
     fun getAllAuthors(): Single<Response<List<AuthorEntity>>>
 
     @GET("posts")
-    fun getAllAuthorsPosts(@Query("authorId") authorId:Long): Single<Response<List<AuthorEntity>>>
+    fun getAllAuthorsPosts(
+        @Query("authorId") authorId: Long,
+        @Query("_sort") _sort: String = "date",
+        @Query("_order") _order: String = "desc"
+    ): Single<Response<List<AuthorEntity>>>
 
     @GET("posts/{post_id}/comments")
-    fun getCommentsForPost(@Path(value = "post_id", encoded = true) post_id:Long): Single<Response<List<CommentsEntity>>>
+    fun getCommentsForPost(
+        @Path(value = "post_id", encoded = true) post_id: Long,
+        @Query("_sort") _sort: String = "date",
+        @Query("_order") _order: String = "desc"
+    ): Single<Response<List<CommentsEntity>>>
 
 }

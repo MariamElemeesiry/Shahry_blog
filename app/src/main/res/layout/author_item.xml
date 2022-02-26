@@ -5,6 +5,10 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto">
     <data>
 
+        <variable
+            name="author"
+            type="com.example.shahry_blog.presentation.models.Author" />
+
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,6 +26,7 @@
             android:id="@+id/simpleDraweeView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            setImageUri="@{author.avatarUrl}"
             app:layout_constraintWidth_percent=".75"
             app:layout_constraintDimensionRatio="1"
             android:layout_marginStart="@dimen/default_double_margin"
@@ -38,6 +43,7 @@
             android:id="@+id/name_tv"
             style="@style/AuthorNameStyle"
             tools:text="Esteban West"
+            android:text="@{author.name}"
             android:textStyle="bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -69,6 +75,7 @@
             <TextView
                 android:id="@+id/user_name_value_tv"
                 style="@style/AuthorEmailStyle"
+                android:text="@{author.userName}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@+id/user_name_tv"

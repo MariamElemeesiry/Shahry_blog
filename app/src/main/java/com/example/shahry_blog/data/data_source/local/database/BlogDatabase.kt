@@ -33,7 +33,7 @@ abstract class BlogDatabase : RoomDatabase() {
         val callbacks: Callback = object : Callback() {}
         fun getDatabaseInstance(context: Context): BlogDatabase {
             if (DB_INSTANCE == null) {
-                createRoomDB<BlogDatabase>(
+                DB_INSTANCE = createRoomDB(
                     context = context.applicationContext,
                     name = DB_NAME,
                     callback = callbacks

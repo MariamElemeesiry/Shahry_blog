@@ -26,3 +26,6 @@ fun AuthorEntity.mapToDomain(): AuthorDomain = AuthorDomain(
     addressDomain = AddressDomain(latitude, longitude)
 )
 
+fun List<AuthorEntity>.mapToDomain(): List<AuthorDomain> = map { it.mapToDomain() }
+
+

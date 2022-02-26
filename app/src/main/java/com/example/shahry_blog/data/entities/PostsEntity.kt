@@ -22,15 +22,16 @@ data class PostsEntity(
     @ColumnInfo(name = "title") val title: String?,
     @ColumnInfo(name = "body") val body: String?,
     @ColumnInfo(name = "imageUrl") val imageUrl: String?,
-    @ColumnInfo(name = "authorId") val authorId:String
+    @ColumnInfo(name = "authorId") val authorId: Long
 )
 
-fun PostsEntity.mapToDomain():PostsDomain = PostsDomain(
+fun PostsEntity.mapToDomain(): PostsDomain = PostsDomain(
     id = id,
     date = date,
     title = title,
     body = body,
     imageUrl = imageUrl,
-    author = null,
-    commentsList = arrayListOf()
+    authorId = authorId
 )
+
+fun List<PostsEntity>.mapToDomain(): List<PostsDomain> = map { it.mapToDomain() }
