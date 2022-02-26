@@ -6,12 +6,17 @@
 
     </data>
 
-    <fragment
-        android:id="@+id/navHostArticles"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/articles_nav" />
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/navHostArticles"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/articles_nav" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

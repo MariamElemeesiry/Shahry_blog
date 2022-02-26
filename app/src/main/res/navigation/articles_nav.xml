@@ -7,25 +7,15 @@
         android:id="@+id/ArticlesListFragment"
         android:name="com.example.shahry_blog.presentation.articles.ArticlesListFragment"
         android:label="ArticlesListFragment">
-
-        <action
-            android:id="@+id/action_ArticlesListFragment_to_ArticleDetailsFragment3"
-            app:destination="@id/ArticleDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/ArticleDetailsFragment"
         android:name="com.example.shahry_blog.presentation.articles.ArticleDetailsFragment"
         android:label="ArticleDetailsFragment">
-        <action
-            android:id="@+id/action_ArticleDetailsFragment_to_AuthorPageFragment"
-            app:destination="@id/AuthorPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/AuthorPageFragment"
         android:name="com.example.shahry_blog.presentation.authors.AuthorPageFragment"
         android:label="AuthorPageFragment">
-        <action
-            android:id="@+id/action_AuthorPageFragment_to_ArticleDetailsFragment"
-            app:destination="@id/ArticleDetailsFragment" />
     </fragment>
 </navigation>

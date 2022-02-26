@@ -2,13 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@+id/AuthorsFragment">
+    app:startDestination="@+id/articles_page">
     <fragment
-        android:id="@+id/ArticlesFragment"
+        android:id="@+id/articles_page"
         android:name="com.example.shahry_blog.presentation.articles.ArticlesFragment"
-        android:label="ArticlesFragment" />
+        android:label="Articles" />
     <fragment
-        android:id="@+id/AuthorsFragment"
+        android:id="@+id/authors_page"
         android:name="com.example.shahry_blog.presentation.authors.AuthorsFragment"
-        android:label="AuthorsFragment" />
+        android:label="Authors" />
 </navigation>
