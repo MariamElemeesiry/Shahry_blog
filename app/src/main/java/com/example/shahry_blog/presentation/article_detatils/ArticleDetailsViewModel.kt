@@ -40,19 +40,19 @@ class ArticleDetailsViewModel @Inject constructor(
         }))
     }
 
-    private fun getArticleAuthor(articleId: Long) {
-        _commentsList.setLoading()
-        compositeDisposable.add(commentsUseCase.getCommentsForArticle(articleId).subscribe({
-            _commentsList.setSuccess(it)
+    private fun getArticleAuthor(authorId: Long) {
+        _author.setLoading()
+        compositeDisposable.add(authorsUseCase.getPostAuthor(authorId).subscribe({
+            _author.setSuccess(it)
         }, {
-            _commentsList.setError()
+            _author.setError()
             it.printStackTrace()
         }))
     }
 
-    fun getArticleDetails(articleId: Long) {
+    fun getArticleDetails(articleId: Long, authorId: Long) {
         getArticleComments(articleId)
-        getArticleAuthor(articleId)
+        getArticleAuthor(authorId)
     }
 
 }

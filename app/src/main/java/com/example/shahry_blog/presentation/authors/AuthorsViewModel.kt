@@ -11,10 +11,11 @@ import com.example.shahry_blog.helpers.setSuccess
 import com.example.shahry_blog.presentation.models.Author
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthorsViewModel @Inject constructor(val authorsUseCase: AuthorsUseCase) :
+class AuthorsViewModel @Inject constructor(private val authorsUseCase: AuthorsUseCase) :
     ViewModel() {
     private val compositeDisposable = CompositeDisposable()
     private val _authorsList: MutableLiveData<Resource<List<Author>>> = MutableLiveData()
@@ -26,11 +27,13 @@ class AuthorsViewModel @Inject constructor(val authorsUseCase: AuthorsUseCase) :
 
     private fun getAllAuthors() {
         _authorsList.setLoading()
-        compositeDisposable.add(authorsUseCase.getAllAuthors().subscribe({
-            _authorsList.setSuccess(it)
-        }, {
-            _authorsList.setError()
-            it.printStackTrace()
-        }))
+        compositeDisposable.add(
+            authorsUseCase.getAllAuthors().subscribeOn(Schedulers.io()).subscribe({
+                _authorsList.setSuccess(it)
+            }, {
+                _authorsList.setError()
+                it.printStackTrace()
+            })
+        )
     }
 }

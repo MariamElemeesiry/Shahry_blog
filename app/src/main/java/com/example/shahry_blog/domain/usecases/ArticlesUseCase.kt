@@ -1,15 +1,28 @@
 package com.example.shahry_blog.domain.usecases
 
+import android.content.Context
+import androidx.paging.PagingData
 import com.example.shahry_blog.data.DataSourceEnum
 import com.example.shahry_blog.domain.entities.mapToPresentation
 import com.example.shahry_blog.domain.repositories.PostsRepositoryImpl
+import com.example.shahry_blog.helpers.checkServerAndInternetConnection
+import com.example.shahry_blog.presentation.models.Articles
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ArticlesUseCase @Inject constructor(
-    private val postsRepositoryImpl: PostsRepositoryImpl
+    private val postsRepositoryImpl: PostsRepositoryImpl,
+    private val context: Context
 ) {
     //TODO:: decide datasource according to network
-    fun getAllArticles() =
-        postsRepositoryImpl.getAllPosts(DataSourceEnum.REMOTE, page = 1, limit = 20)
+    fun getAllArticles(): Flow<PagingData<Articles>> {
+        val hasNet = checkServerAndInternetConnection(context = context).blockingGet()
+        return postsRepositoryImpl.getAllPosts(
+            if (hasNet) DataSourceEnum.REMOTE else DataSourceEnum.ROOM_DB,
+            page = 1,
+            limit = 20
+        )
             .mapToPresentation()
+    }
+
 }

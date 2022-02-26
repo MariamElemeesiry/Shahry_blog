@@ -35,7 +35,7 @@ class ArticleDetailsFragment : Fragment() {
             this.binding = bind
             article = arguments?.getParcelable("article")!!
             Log.e("ARTICLE", "$article")
-            viewModel.getArticleDetails(article.id)
+            viewModel.getArticleDetails(article.id, article.authorId)
             bind.postIv.setImageURI(article.imageUrl)
             bind.articleTv.text = article.body
             bind.titleTv.text = article.title

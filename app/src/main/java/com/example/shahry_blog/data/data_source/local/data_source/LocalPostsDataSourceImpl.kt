@@ -8,7 +8,6 @@ import javax.inject.Inject
 
 class LocalPostsDataSourceImpl @Inject constructor(private val postsDao: PostsDao):
     PostsDataSource {
-    override fun getAllPosts(page: Int, limit: Int): PagingSource<Int, PostsEntity> {
-        TODO("Not yet implemented")
-    }
+    override fun getAllPosts(page: Int, limit: Int): PagingSource<Int, PostsEntity> =
+        postsDao.getAllArticles()
 }

@@ -1,5 +1,6 @@
 package com.example.shahry_blog.di
 
+import android.content.Context
 import com.example.shahry_blog.data.data_source.local.data_source.LocalAuthorDataSourceImpl
 import com.example.shahry_blog.data.data_source.local.data_source.LocalCommentsDataSourceImpl
 import com.example.shahry_blog.data.data_source.local.data_source.LocalPostsDataSourceImpl
@@ -19,6 +20,7 @@ import com.example.shahry_blog.domain.usecases.CommentsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -30,18 +32,27 @@ class AppModule {
     //region RemoteDataSource
     @Singleton
     @Provides
-    fun provideRemoteAuthorDataSource(networkClient: ShahryBlogClient): RemoteAuthorDataSourceImpl =
-        RemoteAuthorDataSourceImpl(networkClient)
+    fun provideRemoteAuthorDataSource(
+        networkClient: ShahryBlogClient,
+        authorsDao: AuthorsDao
+    ): RemoteAuthorDataSourceImpl =
+        RemoteAuthorDataSourceImpl(networkClient, authorsDao)
 
     @Singleton
     @Provides
-    fun provideRemoteCommentsDataSourceImpl(networkClient: ShahryBlogClient): RemoteCommentsDataSourceImpl =
-        RemoteCommentsDataSourceImpl(networkClient)
+    fun provideRemoteCommentsDataSourceImpl(
+        networkClient: ShahryBlogClient,
+        commentsDao: CommentsDao
+    ): RemoteCommentsDataSourceImpl =
+        RemoteCommentsDataSourceImpl(networkClient, commentsDao)
 
     @Singleton
     @Provides
-    fun provideRemotePostsDataSourceImpl(networkClient: ShahryBlogClient): RemotePostsDataSourceImpl =
-        RemotePostsDataSourceImpl(networkClient)
+    fun provideRemotePostsDataSourceImpl(
+        networkClient: ShahryBlogClient,
+        postsDao: PostsDao
+    ): RemotePostsDataSourceImpl =
+        RemotePostsDataSourceImpl(networkClient, postsDao)
 
     //endregion
     //region LocalDataSource
@@ -92,23 +103,26 @@ class AppModule {
     @Singleton
     @Provides
     fun provideAuthorsUseCase(
-        authorRepositoryImpl: AuthorRepositoryImpl
+        authorRepositoryImpl: AuthorRepositoryImpl,
+        @ApplicationContext context: Context
     ): AuthorsUseCase =
-        AuthorsUseCase(authorRepositoryImpl)
+        AuthorsUseCase(authorRepositoryImpl, context)
 
     @Singleton
     @Provides
     fun provideArticlesUseCase(
-        postsRepositoryImpl: PostsRepositoryImpl
+        postsRepositoryImpl: PostsRepositoryImpl,
+        @ApplicationContext context: Context
     ): ArticlesUseCase =
-        ArticlesUseCase(postsRepositoryImpl)
+        ArticlesUseCase(postsRepositoryImpl, context)
 
     @Singleton
     @Provides
     fun provideCommentsUseCase(
-        commentsRepositoryImpl: CommentsRepositoryImpl
+        commentsRepositoryImpl: CommentsRepositoryImpl,
+        @ApplicationContext context: Context
     ): CommentsUseCase =
-        CommentsUseCase(commentsRepositoryImpl)
+        CommentsUseCase(commentsRepositoryImpl, context)
     //endregion
 
 

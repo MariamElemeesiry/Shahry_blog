@@ -6,6 +6,7 @@ import com.example.shahry_blog.data.data_source.remote.data_source.RemoteAuthorD
 import com.example.shahry_blog.data.entities.mapToDomain
 import com.example.shahry_blog.data.repositories.AuthorRepository
 import com.example.shahry_blog.domain.entities.AuthorDomain
+import io.reactivex.Maybe
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -18,6 +19,14 @@ class AuthorRepositoryImpl @Inject constructor(
             DataSourceEnum.REMOTE -> remoteAuthorDataSourceImpl.getAllAuthors()
                 .map { it.mapToDomain() }
             else -> localAuthorDataSourceImpl.getAllAuthors().map { it.mapToDomain() }
+        }
+    }
+
+    override fun getPostAuthor(dataSource: DataSourceEnum, authorId: Long): Maybe<AuthorDomain> {
+        return when (dataSource) {
+            DataSourceEnum.REMOTE -> remoteAuthorDataSourceImpl.getPostAuthor(authorId)
+                .map { it.mapToDomain() }
+            else -> localAuthorDataSourceImpl.getPostAuthor(authorId).map { it.mapToDomain() }
         }
     }
 }
