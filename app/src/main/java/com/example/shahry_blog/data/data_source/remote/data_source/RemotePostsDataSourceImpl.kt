@@ -4,6 +4,11 @@ import com.example.shahry_blog.data.data_source.PostsDataSource
 import com.example.shahry_blog.data.data_source.remote.ShahryBlogClient
 import javax.inject.Inject
 
-class RemotePostsDataSourceImpl @Inject constructor(private val networkClient: ShahryBlogClient):
+class RemotePostsDataSourceImpl @Inject constructor(private val networkClient: ShahryBlogClient) :
     PostsDataSource {
+    override fun getAllPosts(page: Int, limit: Int) =
+        PostsPagingSource(apiCall = { page, limit ->
+            networkClient.getPosts(page, limit)
+        })
+
 }

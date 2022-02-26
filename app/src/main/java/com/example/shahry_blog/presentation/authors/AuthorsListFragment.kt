@@ -1,7 +1,6 @@
 package com.example.shahry_blog.presentation.authors
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +29,6 @@ class AuthorsListFragment : Fragment() {
         ) { bind ->
             this.binding = bind
             bind.vm = viewModel
-            Log.e("RETRO", "AuthorsListFragment>> onCreateView")
             viewModel.authorsList.observe(viewLifecycleOwner) {
                 when (it.state) {
                     ResourceState.SUCCESS -> {

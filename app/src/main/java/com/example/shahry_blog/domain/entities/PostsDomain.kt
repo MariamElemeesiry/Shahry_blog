@@ -1,6 +1,10 @@
 package com.example.shahry_blog.domain.entities
 
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.example.shahry_blog.presentation.models.Articles
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.time.OffsetDateTime
 
 data class PostsDomain(
@@ -12,7 +16,7 @@ data class PostsDomain(
     val authorId: Long
 )
 
-fun PostsDomain.mapToDomain(): Articles = Articles(
+fun PostsDomain.mapToPresentation(): Articles = Articles(
     id = id,
     date = date,
     title = title,
@@ -20,3 +24,8 @@ fun PostsDomain.mapToDomain(): Articles = Articles(
     imageUrl = imageUrl,
     authorId = authorId
 )
+
+
+fun Flow<PagingData<PostsDomain>>.mapToPresentation() =
+    map { it.map { it.mapToPresentation() } }
+

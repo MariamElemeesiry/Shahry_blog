@@ -7,6 +7,10 @@
 
     <data>
 
+        <variable
+            name="article"
+            type="com.example.shahry_blog.presentation.models.Articles" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,6 +24,7 @@
             android:id="@+id/post_iv"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            setImageUri="@{article.imageUrl}"
             fresco:actualImageScaleType="focusCrop"
             fresco:placeholderImageScaleType="focusCrop"
             app:layout_constraintDimensionRatio="2"
@@ -33,9 +38,10 @@
             android:id="@+id/title_tv"
             style="@style/PostListTitleStyle"
             android:layout_width="0dp"
-            app:layout_constraintWidth_percent=".5"
+            android:text="@{article.title}"
             android:layout_height="wrap_content"
             tools:text="Aut nam autem qui non sit aspernatur ex tenetur."
+            app:layout_constraintWidth_percent=".8"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginBottom="@dimen/default_half_margin"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +57,7 @@
             android:layout_marginHorizontal="@dimen/default_half_margin"
             android:layout_marginVertical="@dimen/default_half_margin"
             tools:text="Veniam accusamus ex. Delectus magnam quasi porro. Aut natus quaerat est at nam et accusantium. Mollitia eos aut neque occaecati et quam itaque dolore odio. Porro aperiam et similique. Esse fugit consequatur quasi."
+            android:text="@{article.body}"
             app:layout_constraintTop_toBottomOf="@+id/post_iv"/>
 
 

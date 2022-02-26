@@ -12,12 +12,12 @@ import retrofit2.http.Query
 interface ShahryBlogClient {
 
     @GET("posts")
-    fun getPosts(
+    suspend fun getPosts(
         @Query("_page") page: Int = 1,
         @Query("_limit") limit: Int = 20,
         @Query("_sort") _sort: String = "date",
         @Query("_order") _order: String = "desc"
-    ): Single<Response<List<PostsEntity>>>
+    ): List<PostsEntity>
 
     @GET("authors")
     fun getAllAuthors(): Single<Response<List<AuthorEntity>>>
