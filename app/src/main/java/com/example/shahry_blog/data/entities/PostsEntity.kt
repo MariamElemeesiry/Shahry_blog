@@ -4,22 +4,13 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.example.shahry_blog.data.type_converters.OffsetDateTimeTypeConverter
 import com.example.shahry_blog.domain.entities.PostsDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-@Entity(
-    tableName = "posts",
-    foreignKeys = [ForeignKey(
-        entity = AuthorEntity::class,
-        parentColumns = ["id"],
-        childColumns = ["authorId"],
-        onDelete = ForeignKey.NO_ACTION
-    )]
-)
+@Entity(tableName = "posts")
 data class PostsEntity(
     @PrimaryKey val id: Long,
     @ColumnInfo(name = "date") val date: String,

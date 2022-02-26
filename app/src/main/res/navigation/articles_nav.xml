@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/AuthorPageFragment"
-        android:name="com.example.shahry_blog.presentation.authors.AuthorPageFragment"
+        android:name="com.example.shahry_blog.presentation.author_page.AuthorPageFragment"
         android:label="AuthorPageFragment">
     </fragment>
 </navigation>

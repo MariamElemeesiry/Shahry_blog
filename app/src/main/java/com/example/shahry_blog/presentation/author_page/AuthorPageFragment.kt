@@ -1,4 +1,4 @@
-package com.example.shahry_blog.presentation.articles
+package com.example.shahry_blog.presentation.author_page
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,40 +9,47 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.shahry_blog.R
-import com.example.shahry_blog.databinding.FragmentArticlesListBinding
+import com.example.shahry_blog.databinding.FragmentAuthorPageBinding
 import com.example.shahry_blog.helpers.bind
+import com.example.shahry_blog.presentation.articles.ArticlesAdapter
 import com.example.shahry_blog.presentation.models.Articles
+import com.example.shahry_blog.presentation.models.Author
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ArticlesListFragment : Fragment(), ArticlesAdapter.OnItemClickListener {
-    lateinit var binding: FragmentArticlesListBinding
-    private val viewModel: ArticlesViewModel by viewModels()
+class AuthorPageFragment : Fragment(), ArticlesAdapter.OnItemClickListener {
+    lateinit var binding: FragmentAuthorPageBinding
+    private lateinit var author: Author
+    private val viewModel: AuthorPageViewModel by viewModels()
     private var articlesAdapter = ArticlesAdapter()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return bind<FragmentArticlesListBinding>(
-            R.layout.fragment_articles_list,
+        return bind<FragmentAuthorPageBinding>(
+            R.layout.fragment_author_page,
             inflater,
             container
         ) { bind ->
-            articlesAdapter.setOnItemClickListener(this)
             this.binding = bind
+            author = arguments?.getParcelable("author")!!
+            articlesAdapter.setOnItemClickListener(this)
+            bind.simpleDraweeView.setImageURI(author.avatarUrl)
             bind.articlesRv.adapter = articlesAdapter
-            bind.progress.isVisible = true
+            bind.nameTv.text = author.name
+            bind.userEmailValueTv.text = author.email
+            bind.userNameValueTv.text = author.userName
             lifecycleScope.launch {
-                viewModel.getAllArticles().collectLatest { paging ->
+                viewModel.getAuthorArticles(author.id).collectLatest { paging ->
                     articlesAdapter.submitData(viewLifecycleOwner.lifecycle, paging).let {
                         bind.progress.isVisible = false
                     }
                 }
             }
+
 
         }
     }
@@ -52,5 +59,4 @@ class ArticlesListFragment : Fragment(), ArticlesAdapter.OnItemClickListener {
         bundle.putParcelable("article", item)
         findNavController().navigate(R.id.ArticleDetailsFragment, bundle)
     }
-
 }

@@ -19,4 +19,16 @@ class RemotePostsDataSourceImpl @Inject constructor(
             }
         })
 
+    override fun getAuthorArticles(
+        page: Int,
+        limit: Int,
+        authorId: Long
+    ) =
+        PostsPagingSource(apiCall = { page, limit ->
+            networkClient.getAllAuthorsPosts(page, limit, authorId).map {
+                postsDao.insertOrUpdate(it).subscribeOn(Schedulers.io()).subscribe()
+                it
+            }
+        })
+
 }

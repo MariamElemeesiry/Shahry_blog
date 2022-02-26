@@ -14,4 +14,7 @@ interface PostsDao : BaseDao<PostsEntity> {
 
     @Query("SELECT * FROM posts")
     fun getAllArticles(): PagingSource<Int, PostsEntity>
+
+    @Query("SELECT * FROM posts WHERE authorId = :authorId")
+    fun getAuthorArticles(authorId: Long): PagingSource<Int, PostsEntity>
 }

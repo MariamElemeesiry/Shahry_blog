@@ -1,5 +1,9 @@
 package com.example.shahry_blog.presentation.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Author(
     val id: Long,
     val name: String,
@@ -7,4 +11,4 @@ data class Author(
     val email: String,
     val avatarUrl: String,
     val address: Address
-)
+) : Parcelable

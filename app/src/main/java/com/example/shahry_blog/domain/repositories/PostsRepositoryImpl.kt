@@ -46,4 +46,47 @@ class PostsRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getAuthorArticles(
+        dataSource: DataSourceEnum,
+        page: Int,
+        limit: Int,
+        authorId: Long
+    ): Flow<PagingData<PostsDomain>> {
+        return when (dataSource) {
+            DataSourceEnum.REMOTE -> {
+                Pager(
+                    config = PagingConfig(
+                        pageSize = 20,
+                        maxSize = 100,
+                        enablePlaceholders = false
+                    ),
+                    pagingSourceFactory = {
+                        remotePostsDataSourceImpl.getAuthorArticles(
+                            page,
+                            limit,
+                            authorId
+                        )
+                    }
+                ).flow.mapToDomain()
+
+            }
+            else -> {
+                Pager(
+                    config = PagingConfig(
+                        pageSize = 20,
+                        maxSize = 100,
+                        enablePlaceholders = false
+                    ),
+                    pagingSourceFactory = {
+                        localPostsDataSourceImpl.getAuthorArticles(
+                            page,
+                            limit,
+                            authorId
+                        )
+                    }
+                ).flow.mapToDomain()
+            }
+        }
+    }
+
 }

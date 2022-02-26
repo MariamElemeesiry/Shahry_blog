@@ -8,6 +8,7 @@ import com.example.shahry_blog.helpers.checkServerAndInternetConnection
 import com.example.shahry_blog.presentation.models.Author
 import io.reactivex.Maybe
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class AuthorsUseCase @Inject constructor(
@@ -16,13 +17,17 @@ class AuthorsUseCase @Inject constructor(
 ) {
     //TODO:: decide datasource according to network
     fun getAllAuthors(): Single<List<Author>> {
-        val hasNet = checkServerAndInternetConnection(context = context).blockingGet()
+        val hasNet =
+            checkServerAndInternetConnection(context = context).subscribeOn(Schedulers.io())
+                .blockingGet()
         return authorRepositoryImpl.getAllAuthors(if (hasNet) DataSourceEnum.REMOTE else DataSourceEnum.ROOM_DB)
             .map { it.map { it.mapToPresentation() } }
     }
 
     fun getPostAuthor(authorId: Long): Maybe<Author> {
-        val hasNet = checkServerAndInternetConnection(context = context).blockingGet()
+        val hasNet =
+            checkServerAndInternetConnection(context = context).subscribeOn(Schedulers.io())
+                .blockingGet()
         return authorRepositoryImpl.getPostAuthor(
             if (hasNet) DataSourceEnum.REMOTE else DataSourceEnum.ROOM_DB,
             authorId

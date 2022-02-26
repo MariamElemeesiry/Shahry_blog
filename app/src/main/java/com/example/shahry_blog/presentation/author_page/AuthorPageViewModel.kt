@@ -1,4 +1,4 @@
-package com.example.shahry_blog.presentation.articles
+package com.example.shahry_blog.presentation.author_page
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,13 +10,12 @@ import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 @HiltViewModel
-class ArticlesViewModel @Inject constructor(private val articlesUseCase: ArticlesUseCase) :
+class AuthorPageViewModel @Inject constructor(private val articlesUseCase: ArticlesUseCase) :
     ViewModel() {
     var loading = MutableLiveData(true)
 
-    fun getAllArticles() = articlesUseCase.getAllArticles().onStart {
+    fun getAuthorArticles(authorId: Long) = articlesUseCase.getAuthorArticles(authorId).onStart {
         loading.postValue(true)
         loading.value = true
     }.cachedIn(viewModelScope)
-
 }

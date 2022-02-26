@@ -5,4 +5,5 @@ import com.example.shahry_blog.data.entities.PostsEntity
 
 interface PostsDataSource {
     fun getAllPosts(page: Int, limit: Int): PagingSource<Int, PostsEntity>
+    fun getAuthorArticles(page: Int, limit: Int, authorId: Long): PagingSource<Int, PostsEntity>
 }

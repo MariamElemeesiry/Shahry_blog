@@ -23,11 +23,13 @@ interface ShahryBlogClient {
     fun getAllAuthors(): Single<List<AuthorEntity>>
 
     @GET("posts")
-    fun getAllAuthorsPosts(
+    suspend fun getAllAuthorsPosts(
+        @Query("_page") page: Int = 1,
+        @Query("_limit") limit: Int = 20,
         @Query("authorId") authorId: Long,
         @Query("_sort") _sort: String = "date",
         @Query("_order") _order: String = "desc"
-    ): Single<List<AuthorEntity>>
+    ): List<PostsEntity>
 
     @GET("authors")
     fun getPostAuthor(

@@ -11,6 +11,7 @@ class AuthorsAdapter internal constructor(data: List<Author>, ctx: Context) :
     RecyclerView.Adapter<AuthorsAdapter.ViewHolder>() {
     private val mData: List<Author> = data
     val context = ctx
+    private var mListener: OnItemClickListener? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,7 +21,7 @@ class AuthorsAdapter internal constructor(data: List<Author>, ctx: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(mData[position])
+        holder.bind(mData[position], mListener)
     }
 
     override fun getItemCount(): Int {
@@ -33,9 +34,11 @@ class AuthorsAdapter internal constructor(data: List<Author>, ctx: Context) :
         binding: AuthorItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Author) {
+        fun bind(item: Author, mListener: OnItemClickListener?) {
             binding.author = item
-            binding
+            binding.root.setOnClickListener {
+                mListener?.onItemClicked(item)
+            }
             binding.executePendingBindings()
         }
 
@@ -48,6 +51,14 @@ class AuthorsAdapter internal constructor(data: List<Author>, ctx: Context) :
                 )
             }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClicked(item: Author)
+    }
+
+    fun setOnItemClickListener(mListener: OnItemClickListener) {
+        this.mListener = mListener
     }
 
 }

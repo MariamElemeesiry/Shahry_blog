@@ -10,4 +10,11 @@ class LocalPostsDataSourceImpl @Inject constructor(private val postsDao: PostsDa
     PostsDataSource {
     override fun getAllPosts(page: Int, limit: Int): PagingSource<Int, PostsEntity> =
         postsDao.getAllArticles()
+
+    override fun getAuthorArticles(
+        page: Int,
+        limit: Int,
+        authorId: Long
+    ): PagingSource<Int, PostsEntity> =
+        postsDao.getAuthorArticles(authorId)
 }

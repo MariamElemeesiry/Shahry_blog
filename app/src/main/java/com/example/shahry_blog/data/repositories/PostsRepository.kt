@@ -11,4 +11,11 @@ interface PostsRepository {
         page: Int,
         limit: Int
     ): Flow<PagingData<PostsDomain>>
+
+    fun getAuthorArticles(
+        dataSource: DataSourceEnum,
+        page: Int,
+        limit: Int,
+        authorId: Long
+    ): Flow<PagingData<PostsDomain>>
 }
