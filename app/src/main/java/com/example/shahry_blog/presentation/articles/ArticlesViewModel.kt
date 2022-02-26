@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.shahry_blog.domain.usecases.ArticlesUseCase
+import com.example.shahry_blog.presentation.models.Articles
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
@@ -13,6 +14,7 @@ import javax.inject.Inject
 class ArticlesViewModel @Inject constructor(private val articlesUseCase: ArticlesUseCase) :
     ViewModel() {
     var loading = MutableLiveData(true)
+    val selectedArticle: MutableLiveData<Articles> = MutableLiveData()
 
     fun getAllArticles() = articlesUseCase.getAllArticles().onStart {
         loading.postValue(true)

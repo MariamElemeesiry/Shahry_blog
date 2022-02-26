@@ -5,6 +5,10 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto">
     <data>
 
+        <variable
+            name="comment"
+            type="com.example.shahry_blog.presentation.models.Comments" />
+
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -28,6 +32,7 @@
             android:layout_marginEnd="@dimen/default_double_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            setImageUri="@{comment.avatarUrl}"
             app:placeholderImage="@drawable/ic_image_placeholder"
             app:viewAspectRatio="1"
             fresco:roundAsCircle="true" />
@@ -40,6 +45,7 @@
             style="@style/AuthorNameStyle"
             android:layout_marginStart="@dimen/default_half_margin"
             tools:text="Esteban West"
+            android:text="@{comment.userName}"
             app:layout_constraintStart_toEndOf="@+id/user_image_iv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/user_image_iv"/>
@@ -53,6 +59,7 @@
             android:paddingBottom="@dimen/default_half_margin"
             android:layout_marginTop="@dimen/default_half_margin"
             tools:text="Veritatis praesentium sed similique in enim facilis numqVeritatis praesentium sed similique in enim facilis numqVeritatis praesentium sed similique in enim facilis numquam ratione velit. Consequatur cumque repellat unde. Sunt sit qui provident consectetur corporis quasi ut. Expedita ex occaecati veritatis autem."
+            android:text="@{comment.body}"
             app:layout_constraintStart_toEndOf="@+id/user_image_iv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_name_tv"/>
@@ -66,13 +73,16 @@
         android:layout_marginTop="@dimen/default_half_margin"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/content_layout">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             style="@style/AuthorEmailStyle"
+            android:text="@{comment.date}"
             android:layout_marginStart="@dimen/default_half_margin"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/black"
             tools:text="2 days ago" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

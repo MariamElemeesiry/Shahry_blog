@@ -15,6 +15,7 @@ import com.example.shahry_blog.domain.repositories.CommentsRepositoryImpl
 import com.example.shahry_blog.domain.repositories.PostsRepositoryImpl
 import com.example.shahry_blog.domain.usecases.ArticlesUseCase
 import com.example.shahry_blog.domain.usecases.AuthorsUseCase
+import com.example.shahry_blog.domain.usecases.CommentsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -101,6 +102,13 @@ class AppModule {
         postsRepositoryImpl: PostsRepositoryImpl
     ): ArticlesUseCase =
         ArticlesUseCase(postsRepositoryImpl)
+
+    @Singleton
+    @Provides
+    fun provideCommentsUseCase(
+        commentsRepositoryImpl: CommentsRepositoryImpl
+    ): CommentsUseCase =
+        CommentsUseCase(commentsRepositoryImpl)
     //endregion
 
 

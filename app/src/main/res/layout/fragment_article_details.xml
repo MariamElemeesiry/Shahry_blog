@@ -7,10 +7,18 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.example.shahry_blog.presentation.article_detatils.ArticleDetailsViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="com.example.shahry_blog.helpers.ResourceState" />
+
     </data>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:fillViewport="true">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -71,8 +79,21 @@
                 android:orientation="vertical"
                 tools:itemCount="10"
                 tools:listitem="@layout/comment_item"
-                app:layout_constraintTop_toBottomOf="@id/comments_tv"/>
+                app:layout_constraintTop_toBottomOf="@id/comments_tv" />
+
+            <include
+                android:id="@+id/progress"
+                layout="@layout/loading_layout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:isVisible="@{vm.author.state instanceof ResourceState.LOADING ||vm.commentsList.state instanceof ResourceState.LOADING }"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </ScrollView>
 

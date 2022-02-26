@@ -10,7 +10,7 @@
     </fragment>
     <fragment
         android:id="@+id/ArticleDetailsFragment"
-        android:name="com.example.shahry_blog.presentation.articles.ArticleDetailsFragment"
+        android:name="com.example.shahry_blog.presentation.article_detatils.ArticleDetailsFragment"
         android:label="ArticleDetailsFragment">
     </fragment>
     <fragment

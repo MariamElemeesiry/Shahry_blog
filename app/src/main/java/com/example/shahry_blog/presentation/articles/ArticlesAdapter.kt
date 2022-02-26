@@ -48,6 +48,9 @@ class ArticlesAdapter :
 
 
             binding.article = item
+            binding.root.setOnClickListener {
+                mListener?.onItemClicked(item)
+            }
 
             binding.executePendingBindings()
         }

@@ -1,5 +1,6 @@
 package com.example.shahry_blog.domain.entities
 
+import com.example.shahry_blog.helpers.getTimeAgo
 import com.example.shahry_blog.presentation.models.Comments
 import java.time.OffsetDateTime
 
@@ -16,7 +17,7 @@ data class CommentsDomain(
 fun CommentsDomain.mapToPresentation(): Comments = Comments(
     id = id,
     userName = userName,
-    date = date,
+    date = getTimeAgo(date)!!,
     body = body,
     email = email,
     avatarUrl = avatarUrl
